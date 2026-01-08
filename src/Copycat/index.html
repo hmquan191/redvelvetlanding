@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Red Velvet - Cosmic Velvet: A symphony of elegance and dissonance."
+    />
+    <title>Red Velvet - Cosmic Velvet</title>
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Primary Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;700&family=Dancing+Script:wght@400;700&family=Anton&family=Abril+Fatface&family=Permanent+Marker&family=Roboto+Slab:wght@400;700&family=Pacifico&family=Oswald:wght@400;700&family=Lobster&family=Shadows+Into+Light&family=Monoton&family=Righteous&family=Bangers&family=Creepster&family=Gloria+Hallelujah&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+          },
+          extend: {
+            colors: {
+              "rv-irene": "#C21E56",
+              "rv-seulgi": "#EEB211",
+              "rv-wendy": "#0070B8",
+              "rv-joy": "#32CD32",
+              "rv-yeri": "#6C3082",
+              pearl: "#F3F4F6",
+              "deep-space": "#0f172a",
+            },
+            backgroundImage: {
+              shimmer:
+                "linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 60%)",
+            },
+            animation: {
+              "float-slow": "float 8s ease-in-out infinite",
+              "float-delayed": "float 8s ease-in-out 4s infinite",
+              "pulse-subtle": "pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              "shimmer-slide": "shimmer 3s infinite linear",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-15px)" },
+              },
+              shimmer: {
+                "0%": { backgroundPosition: "-200% 0" },
+                "100%": { backgroundPosition: "200% 0" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/intro.css" />
+  </head>
+  <body
+    class="bg-deep-space text-pearl antialiased selection:bg-white/20 selection:text-white overflow-x-hidden font-sans"
+  >
+    <!-- Intro Screen -->
+    <div
+      id="intro-screen"
+      class="fixed inset-0 z-[100] bg-deep-space flex items-center justify-center overflow-hidden"
+    >
+      <h1
+        id="intro-text"
+        class="text-6xl md:text-9xl text-white font-bold tracking-widest transition-all duration-300"
+      >
+        RED VELVET
+      </h1>
+    </div>
+
+    <!-- Fan Intro Overlay (Hidden initially) -->
+    <div
+      id="fan-intro"
+      class="fixed inset-0 z-[90] pointer-events-none hidden flex items-center justify-center"
+    >
+      <div
+        class="relative w-full max-w-4xl h-96 flex items-center justify-center perspective-1000"
+      >
+        <!-- Cards will be injected here or hardcoded -->
+        <div
+          class="fan-card absolute w-48 h-72 bg-cover bg-center rounded-xl shadow-2xl border border-white/20 transform transition-all duration-1000 origin-bottom-left opacity-0"
+          style="
+            background-image: url('https://i.pinimg.com/736x/8a/5b/31/8a5b31b404e78f2912d92f35d745697b.jpg');
+            --rotate: -20deg;
+            --translate: -200px;
+            z-index: 1;
+          "
+        ></div>
+        <div
+          class="fan-card absolute w-48 h-72 bg-cover bg-center rounded-xl shadow-2xl border border-white/20 transform transition-all duration-1000 origin-bottom-left opacity-0"
+          style="
+            background-image: url('https://i.pinimg.com/736x/cc/95/e4/cc95e48d73cdfd5767f2617e4b59e180.jpg');
+            --rotate: 20deg;
+            --translate: 200px;
+            z-index: 5;
+          "
+        ></div>
+        <div
+          class="fan-card absolute w-48 h-72 bg-cover bg-center rounded-xl shadow-2xl border border-white/20 transform transition-all duration-1000 origin-bottom-left opacity-0"
+          style="
+            background-image: url('https://i.pinimg.com/736x/fc/a2/29/fca2298370f5a60303f3dc550c049b2c.jpg');
+            --rotate: -10deg;
+            --translate: -100px;
+            z-index: 2;
+          "
+        ></div>
+        <div
+          class="fan-card absolute w-48 h-72 bg-cover bg-center rounded-xl shadow-2xl border border-white/20 transform transition-all duration-1000 origin-bottom-left opacity-0"
+          style="
+            background-image: url('https://i.pinimg.com/736x/fe/01/bd/fe01bd2523404ae659a069ef4a32d2b0.jpg');
+            --rotate: 0deg;
+            --translate: 0px;
+            z-index: 3;
+          "
+        ></div>
+        <div
+          class="fan-card absolute w-48 h-72 bg-cover bg-center rounded-xl shadow-2xl border border-white/20 transform transition-all duration-1000 origin-bottom-left opacity-0"
+          style="
+            background-image: url('https://i.pinimg.com/736x/a3/11/bb/a311bb5f1d379d9306321828f8e0a3bd.jpg');
+            --rotate: 10deg;
+            --translate: 100px;
+            z-index: 4;
+          "
+        ></div>
+      </div>
+    </div>
+    <!-- Global Background Layers -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div class="absolute inset-0 bg-noise z-20 mix-blend-overlay"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b via-[#1a233a] z-0 from-slate-900 to-slate-950"
+      ></div>
+      <div
+        class="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] rounded-full blur-[120px] animate-pulse-subtle z-10 bg-blue-900/10"
+      ></div>
+      <div
+        class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full blur-[120px] animate-float z-10 bg-indigo-900/10"
+      ></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <nav class="nav-container mx-auto px-6 lg:px-12 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="index.html" class="nav-logo group flex items-center gap-3">
+            <span
+              class="font-serif text-xl italic tracking-tight text-white/90 group-hover:text-white transition-colors"
+            >
+              Red Velvet
+            </span>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <ul class="hidden md:flex items-center gap-8">
+            <li>
+              <a
+                href="index.html"
+                class="nav-link nav-link-active text-xs tracking-[0.2em] uppercase text-white hover:text-white transition-all duration-300 relative py-2"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="members.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 relative py-2"
+              >
+                Members
+              </a>
+            </li>
+            <li>
+              <a
+                href="gallery.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 relative py-2"
+              >
+                Gallery
+              </a>
+            </li>
+          </ul>
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="md:hidden nav-mobile-toggle p-2 text-white/60 hover:text-white transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div
+          class="nav-mobile hidden md:hidden mt-4 pt-4 border-t border-white/10"
+        >
+          <ul class="flex flex-col gap-4">
+            <li>
+              <a
+                href="index.html"
+                class="nav-link nav-link-active text-xs tracking-[0.2em] uppercase text-white hover:text-white transition-all duration-300 block py-2"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="members.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 block py-2"
+              >
+                Members
+              </a>
+            </li>
+            <li>
+              <a
+                href="gallery.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 block py-2"
+              >
+                Gallery
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section
+      id="hero"
+      class="section relative h-screen w-full flex items-center justify-center overflow-hidden"
+    >
+      <div
+        class="animate-in fade-in duration-1000 slide-in-from-bottom-10 text-center z-20 pr-6 pl-6 relative space-y-8"
+      >
+        <div class="inline-block mb-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="sparkles"
+            class="lucide lucide-sparkles w-6 h-6 mx-auto mb-4 font-thin text-white/60"
+          >
+            <path
+              d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
+            ></path>
+            <path d="M20 2v4"></path>
+            <path d="M22 4h-4"></path>
+            <circle cx="4" cy="20" r="2"></circle>
+          </svg>
+          <span
+            class="text-xs tracking-[0.4em] uppercase border-b pb-2 ml-2 mr-2 text-white/70 border-white/20"
+            >The ReVe Festival</span
+          >
+        </div>
+
+        <h1
+          class="font-serif text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight text-shadow-sm text-white"
+        >
+          <span class="block italic font-light opacity-90">Cosmic</span>
+          <span class="block mt-[-0.2em]">Velvet</span>
+        </h1>
+
+        <p
+          class="font-light tracking-wide text-sm md:text-lg max-w-xl mx-auto leading-relaxed text-white/60"
+        >
+          A symphony of elegance and duality. <br />Welcome to the new era of
+          satin and starlight.
+        </p>
+        <!-- new section,  -->
+        <a
+          href="#carousel-section"
+          class="pt-12 opacity-50 animate-bounce cursor-pointer hover:opacity-100 transition-opacity block"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="chevron-down"
+            class="lucide lucide-chevron-down w-5 h-5 mx-auto font-thin text-white"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- CAROUSEL SECTION - Fairy Tape Recorder -->
+    <section id="carousel-section" class="relative z-20 py-16 overflow-hidden">
+      <!-- Magical Background Glow -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-radial from-pink-500/10 via-purple-500/5 to-transparent rounded-full blur-3xl"
+        ></div>
+      </div>
+
+      <!-- Floating Stardust Particles -->
+      <div
+        class="stardust-container absolute inset-0 pointer-events-none overflow-hidden"
+      >
+        <div class="stardust stardust-1"></div>
+        <div class="stardust stardust-2"></div>
+        <div class="stardust stardust-3"></div>
+        <div class="stardust stardust-4"></div>
+        <div class="stardust stardust-5"></div>
+        <div class="stardust stardust-6"></div>
+        <div class="stardust stardust-7"></div>
+        <div class="stardust stardust-8"></div>
+      </div>
+
+      <!-- Section Header with Stars -->
+      <div class="container mx-auto px-6 mb-6 text-center relative z-10">
+        <div class="flex items-center justify-center gap-4 mb-4">
+          <!-- Left Crescent Moon -->
+          <svg
+            class="w-6 h-6 text-pink-300/60 animate-pulse"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+          <!-- Sparkle Stars -->
+          <svg
+            class="w-4 h-4 text-yellow-200/80 animate-twinkle"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon
+              points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+            />
+          </svg>
+          <h2
+            class="font-serif text-3xl italic text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-white to-purple-200 tracking-widest"
+          >
+            Discography
+          </h2>
+          <svg
+            class="w-4 h-4 text-yellow-200/80 animate-twinkle-delayed"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon
+              points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+            />
+          </svg>
+          <!-- Right Crescent Moon (mirrored) -->
+          <svg
+            class="w-6 h-6 text-pink-300/60 animate-pulse transform scale-x-[-1]"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </div>
+        <p
+          class="text-xs tracking-[0.3em] uppercase text-pink-200/40 font-light"
+        >
+          <!-- ✧ magical moments ✧ -->
+        </p>
+      </div>
+
+      <!-- Fairy Tape Recorder Container -->
+      <div class="tape-recorder relative mx-auto max-w-6xl">
+        <!-- Top Decorative Border -->
+        <div
+          class="absolute -top-3 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-pink-400/30 to-transparent"
+        ></div>
+
+        <!-- Corner Decorations - Stars -->
+        <div class="absolute -top-6 left-8 md:left-16">
+          <svg
+            class="w-8 h-8 text-pink-300/40 animate-float-slow"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon
+              points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+            />
+          </svg>
+        </div>
+        <div class="absolute -top-4 right-8 md:right-16">
+          <svg
+            class="w-6 h-6 text-purple-300/50 animate-float-delayed"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon
+              points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+            />
+          </svg>
+        </div>
+
+        <!-- Main Cassette Window (Carousel Area) -->
+        <div
+          class="cassette-window relative mx-4 md:mx-28 lg:mx-40 py-8 px-2 rounded-2xl overflow-hidden"
+        >
+          <!-- Glass Effect Border -->
+          <div
+            class="absolute inset-0 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
+          ></div>
+
+          <!-- Inner Glow -->
+          <div
+            class="absolute inset-[1px] rounded-2xl bg-gradient-to-b from-pink-500/5 via-transparent to-purple-500/5"
+          ></div>
+
+          <!-- Carousel Track Wrapper -->
+          <div class="carousel-wrapper relative overflow-hidden">
+            <!-- Carousel Track - Will be duplicated by JS -->
+            <div class="carousel-track flex gap-6">
+              <!-- Cosmic -->
+              <div
+                class="carousel-item group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 border-2 border-pink-300/20 hover:border-pink-300/60 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]"
+                data-video-id="FyG21rXCxlY"
+              >
+                <img
+                  src="https://img.youtube.com/vi/FyG21rXCxlY/maxresdefault.jpg"
+                  alt="Cosmic"
+                  class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <!-- <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-pink-900/40 transition-colors flex items-end justify-center pb-4"
+                >
+                  <span
+                    class="font-serif italic text-xl text-white drop-shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform"
+                    >Cosmic</span
+                  >
+                </div> -->
+              </div>
+
+              <!-- Zimzalabim -->
+              <div
+                class="carousel-item group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 border-2 border-purple-300/20 hover:border-purple-300/60 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]"
+                data-video-id="YBnGBb1wg98"
+              >
+                <img
+                  src="https://img.youtube.com/vi/YBnGBb1wg98/maxresdefault.jpg"
+                  alt="Zimzalabim"
+                  class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <!-- <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-purple-900/40 transition-colors flex items-end justify-center pb-4"
+                >
+                  <span
+                    class="font-serif italic text-xl text-white drop-shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform"
+                    >Zimzalabim</span
+                  >
+                </div> -->
+                <div
+                  class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <svg
+                    class="w-5 h-5 text-yellow-200 animate-spin-slow"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Bad Boy -->
+              <div
+                class="carousel-item group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 border-2 border-blue-300/20 hover:border-blue-300/60 hover:shadow-[0_0_30px_rgba(96,165,250,0.3)]"
+                data-video-id="J_CFBjAyPWE"
+              >
+                <img
+                  src="https://img.youtube.com/vi/J_CFBjAyPWE/maxresdefault.jpg"
+                  alt="Bad Boy"
+                  class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <!-- <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-blue-900/40 transition-colors flex items-end justify-center pb-4"
+                >
+                  <span
+                    class="font-serif italic text-xl text-white drop-shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform"
+                    >Bad Boy</span
+                  >
+                </div> -->
+                <div
+                  class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <svg
+                    class="w-5 h-5 text-yellow-200 animate-spin-slow"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Psycho -->
+              <div
+                class="carousel-item group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 border-2 border-red-300/20 hover:border-red-300/60 hover:shadow-[0_0_30px_rgba(248,113,113,0.3)]"
+                data-video-id="uR8Mrt1IpXg"
+              >
+                <img
+                  src="https://img.youtube.com/vi/uR8Mrt1IpXg/maxresdefault.jpg"
+                  alt="Psycho"
+                  class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <!-- <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-red-900/40 transition-colors flex items-end justify-center pb-4"
+                >
+                  <span
+                    class="font-serif italic text-xl text-white drop-shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform"
+                    >Psycho</span
+                  >
+                </div> -->
+                <div
+                  class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <svg
+                    class="w-5 h-5 text-yellow-200 animate-spin-slow"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Peek-A-Boo -->
+              <div
+                class="carousel-item group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 border-2 border-orange-300/20 hover:border-orange-300/60 hover:shadow-[0_0_30px_rgba(251,146,60,0.3)]"
+                data-video-id="6uJf2IT2Zh8"
+              >
+                <img
+                  src="https://img.youtube.com/vi/6uJf2IT2Zh8/maxresdefault.jpg"
+                  alt="Peek-A-Boo"
+                  class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <!-- <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-orange-900/40 transition-colors flex items-end justify-center pb-4"
+                >
+                  <span
+                    class="font-serif italic text-xl text-white drop-shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform"
+                    >Peek-A-Boo</span
+                  >
+                </div> -->
+                <div
+                  class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <svg
+                    class="w-5 h-5 text-yellow-200 animate-spin-slow"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Russian Roulette -->
+              <div
+                class="carousel-item group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 border-2 border-cyan-300/20 hover:border-cyan-300/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.3)]"
+                data-video-id="QslJYDX3o8s"
+              >
+                <img
+                  src="https://img.youtube.com/vi/QslJYDX3o8s/maxresdefault.jpg"
+                  alt="Russian Roulette"
+                  class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <!-- <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-cyan-900/40 transition-colors flex items-end justify-center pb-4"
+                >
+                  <span
+                    class="font-serif italic text-xl text-white drop-shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform"
+                    >Russian Roulette</span
+                  >
+                </div> -->
+                <div
+                  class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <svg
+                    class="w-5 h-5 text-yellow-200 animate-spin-slow"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gradient Fade Edges -->
+          <div
+            class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-deep-space/90 to-transparent pointer-events-none z-10"
+          ></div>
+          <div
+            class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-deep-space/90 to-transparent pointer-events-none z-10"
+          ></div>
+        </div>
+
+        <!-- Bottom Decorative Elements -->
+        <div
+          class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent"
+        ></div>
+
+        <!-- Bottom Stars -->
+        <div class="absolute -bottom-5 left-12 md:left-20">
+          <svg
+            class="w-5 h-5 text-yellow-200/40 animate-twinkle"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon
+              points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+            />
+          </svg>
+        </div>
+        <div class="absolute -bottom-6 right-16 md:right-24">
+          <svg
+            class="w-4 h-4 text-pink-200/50 animate-twinkle-delayed"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon
+              points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+            />
+          </svg>
+        </div>
+
+        <!-- Fairy Wand Accent -->
+        <div
+          class="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2"
+        >
+          <div
+            class="w-8 h-px bg-gradient-to-r from-transparent to-pink-300/30"
+          ></div>
+          <svg
+            class="w-4 h-4 text-pink-300/60"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon
+              points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+            />
+          </svg>
+          <div
+            class="w-8 h-px bg-gradient-to-l from-transparent to-pink-300/30"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="relative z-20 py-12 mt-8 text-center text-xs tracking-widest uppercase font-light text-white/30"
+    >
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <svg
+          class="w-3 h-3 text-pink-300/40"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <polygon
+            points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+          />
+        </svg>
+        <span>✧</span>
+        <svg
+          class="w-3 h-3 text-purple-300/40"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <polygon
+            points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9"
+          />
+        </svg>
+      </div>
+      <p>© SM Entertainment. Fan Concept Design.</p>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

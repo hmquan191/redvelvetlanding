@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Red Velvet Members - Meet the five queens of K-pop."
+    />
+    <title>Red Velvet - Members</title>
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Primary Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+          },
+          extend: {
+            colors: {
+              "rv-irene": "#C21E56",
+              "rv-seulgi": "#EEB211",
+              "rv-wendy": "#0070B8",
+              "rv-joy": "#32CD32",
+              "rv-yeri": "#6C3082",
+              pearl: "#F3F4F6",
+              "deep-space": "#0f172a",
+            },
+            backgroundImage: {
+              shimmer:
+                "linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 60%)",
+            },
+            animation: {
+              "float-slow": "float 8s ease-in-out infinite",
+              "float-delayed": "float 8s ease-in-out 4s infinite",
+              "pulse-subtle": "pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              "shimmer-slide": "shimmer 3s infinite linear",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-15px)" },
+              },
+              shimmer: {
+                "0%": { backgroundPosition: "-200% 0" },
+                "100%": { backgroundPosition: "200% 0" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body
+    class="bg-deep-space text-pearl antialiased selection:bg-white/20 selection:text-white overflow-x-hidden font-sans"
+  >
+    <!-- Global Background Layers -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div class="absolute inset-0 bg-noise z-20 mix-blend-overlay"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b via-[#1a233a] z-0 from-slate-900 to-slate-950"
+      ></div>
+      <div
+        class="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] rounded-full blur-[120px] animate-pulse-subtle z-10 bg-blue-900/10"
+      ></div>
+      <div
+        class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full blur-[120px] animate-float z-10 bg-indigo-900/10"
+      ></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <nav class="nav-container mx-auto px-6 lg:px-12 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="index.html" class="nav-logo group flex items-center gap-3">
+            <span
+              class="font-serif text-xl italic tracking-tight text-white/90 group-hover:text-white transition-colors"
+            >
+              Red Velvet
+            </span>
+            <!-- <span class="hidden sm:block h-4 w-px bg-white/20"></span>
+            <span
+              class="hidden sm:block text-[10px] tracking-[0.3em] uppercase text-white/40 group-hover:text-white/60 transition-colors"
+            >
+              Cosmic Velvet
+            </span> -->
+          </a>
+
+          <!-- Desktop Navigation -->
+          <ul class="hidden md:flex items-center gap-8">
+            <li>
+              <a
+                href="index.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 relative py-2"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="members.html"
+                class="nav-link nav-link-active text-xs tracking-[0.2em] uppercase text-white hover:text-white transition-all duration-300 relative py-2"
+              >
+                Members
+              </a>
+            </li>
+            <li>
+              <a
+                href="gallery.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 relative py-2"
+              >
+                Gallery
+              </a>
+            </li>
+          </ul>
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="md:hidden nav-mobile-toggle p-2 text-white/60 hover:text-white transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div
+          class="nav-mobile hidden md:hidden mt-4 pt-4 border-t border-white/10"
+        >
+          <ul class="flex flex-col gap-4">
+            <li>
+              <a
+                href="index.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 block py-2"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="members.html"
+                class="nav-link nav-link-active text-xs tracking-[0.2em] uppercase text-white hover:text-white transition-all duration-300 block py-2"
+              >
+                Members
+              </a>
+            </li>
+            <li>
+              <a
+                href="gallery.html"
+                class="nav-link text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-all duration-300 block py-2"
+              >
+                Gallery
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Navigation Dots -->
+    <nav
+      class="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-6 mix-blend-difference"
+      aria-label="Page Navigation"
+    >
+      <button
+        aria-label="Irene"
+        data-target="irene"
+        class="nav-dot w-1.5 h-1.5 rounded-full bg-rv-irene/40 transition-all duration-500 hover:scale-150 hover:bg-rv-irene"
+      ></button>
+      <button
+        aria-label="Seulgi"
+        data-target="seulgi"
+        class="nav-dot w-1.5 h-1.5 rounded-full bg-rv-seulgi/40 transition-all duration-500 hover:scale-150 hover:bg-rv-seulgi"
+      ></button>
+      <button
+        aria-label="Wendy"
+        data-target="wendy"
+        class="nav-dot w-1.5 h-1.5 rounded-full bg-rv-wendy/40 transition-all duration-500 hover:scale-150 hover:bg-rv-wendy bg-white/30"
+      ></button>
+      <button
+        aria-label="Joy"
+        data-target="joy"
+        class="nav-dot w-1.5 h-1.5 rounded-full bg-rv-joy/40 transition-all duration-500 hover:scale-150 hover:bg-rv-joy bg-white/30"
+      ></button>
+      <button
+        aria-label="Yeri"
+        data-target="yeri"
+        class="nav-dot w-1.5 h-1.5 rounded-full bg-rv-yeri/40 transition-all duration-500 hover:scale-150 hover:bg-rv-yeri bg-white/30"
+      ></button>
+    </nav>
+
+    <!-- Members Hero Header -->
+    <section class="relative pt-32 pb-16 flex items-center justify-center">
+      <div class="text-center z-20 px-6 space-y-4">
+        <span class="text-xs tracking-[0.4em] uppercase text-white/50"
+          >Meet the Queens</span
+        >
+        <h1
+          class="font-serif text-5xl md:text-7xl font-medium tracking-tight text-white"
+        >
+          <span class="italic font-light opacity-90">The</span> Members
+        </h1>
+      </div>
+    </section>
+
+    <!-- IRENE SECTION -->
+    <section
+      class="section min-h-screen flex pt-20 pb-20 relative items-center justify-center"
+      id="irene"
+    >
+      <div
+        class="container max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+      >
+        <div
+          class="lg:col-span-5 relative group section-card transition-all duration-1000 ease-out"
+        >
+          <div
+            class="absolute -inset-1 rounded-[2rem] bg-gradient-to-tr from-rv-irene/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-md"
+          ></div>
+          <div
+            class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden glass-panel glass-card-hover transition-all duration-700"
+          >
+            <img
+              src="https://i.pinimg.com/736x/b7/ea/af/b7eaaff2e31315934d4b73ef17ec6ac8.jpg"
+              alt="Irene - Leader and Main Rapper"
+              class="object-[50%_20%] group-hover:scale-105 transition-transform duration-1000 grayscale-[20%] group-hover:grayscale-0 opacity-90 w-full h-full object-cover"
+            />
+            <div
+              class="bg-gradient-to-t from-rv-irene/90 via-rv-irene/20 to-transparent pt-8 pr-8 pb-8 pl-8 absolute right-0 bottom-0 left-0"
+            >
+              <h2
+                class="font-serif text-4xl italic mb-1 text-white tracking-tight"
+              >
+                Irene
+              </h2>
+              <div
+                class="flex items-center gap-3 text-xs tracking-widest uppercase text-white/90"
+              >
+                <span class="px-2 py-0.5 backdrop-blur-sm rounded bg-white/10"
+                  >Leader</span
+                >
+                <span>Main Rapper</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="lg:col-span-7 space-y-8 text-left lg:pl-12 section-text transition-all duration-1000 delay-300"
+        >
+          <div class="flex items-center gap-4">
+            <div class="h-[1px] w-16 bg-rv-irene/50"></div>
+            <span
+              class="text-rv-irene text-xs tracking-[0.3em] uppercase font-medium"
+              >Original Visual</span
+            >
+          </div>
+          <h3
+            class="font-serif text-5xl lg:text-7xl leading-tight text-white/90 tracking-tight"
+          >
+            The Epitome of <span class="italic text-white/50">Elegance</span>
+          </h3>
+          <p
+            class="text-lg font-extralight leading-relaxed max-w-md text-slate-300"
+          >
+            "I'm a little monster, be scared of me." Delicate power wrapped in
+            satin. She commands attention with a whisper, embodying the perfect
+            balance of authority and grace.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEULGI SECTION -->
+    <section
+      id="seulgi"
+      class="section min-h-screen flex items-center justify-center relative py-20"
+    >
+      <div
+        class="container grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mr-auto ml-auto pr-6 pl-6 gap-x-12 gap-y-12 items-center"
+      >
+        <div
+          class="lg:col-span-7 order-2 lg:order-1 space-y-8 text-left lg:pr-12 section-text transition-all duration-1000 delay-300"
+        >
+          <div class="flex items-center gap-4">
+            <span
+              class="text-rv-seulgi text-xs tracking-[0.3em] uppercase font-medium"
+              >The Ace</span
+            >
+            <div class="h-[1px] w-16 bg-rv-seulgi/50"></div>
+          </div>
+          <h3
+            class="font-serif text-5xl lg:text-7xl leading-tight text-white/90 tracking-tight"
+          >
+            Artistry in <br /><span class="italic text-white/50">Motion</span>
+          </h3>
+          <p
+            class="text-lg font-extralight leading-relaxed max-w-md text-slate-300"
+          >
+            Sharp lines, soulful gaze. A dancer who paints with movement,
+            bringing a golden warmth to the cool velvet night.
+          </p>
+        </div>
+        <div
+          class="lg:col-span-5 order-1 lg:order-2 relative group section-card transition-all duration-1000 ease-out"
+        >
+          <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[90%] bg-rv-seulgi/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+          ></div>
+          <div
+            class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden glass-panel glass-card-hover transition-all duration-700 border-l border-rv-seulgi/30"
+          >
+            <img
+              src="https://i.pinimg.com/736x/c5/8c/eb/c58ceb3a2fad516d1e66ffce159ca139.jpg"
+              alt="Seulgi - Main Dancer and Lead Vocal"
+              class="group-hover:scale-105 transition-transform duration-1000 grayscale-[20%] group-hover:grayscale-0 opacity-90 w-full h-full object-cover"
+            />
+            <div
+              class="bg-gradient-to-t from-rv-seulgi/90 via-rv-seulgi/20 to-transparent pt-8 pr-8 pb-8 pl-8 absolute right-0 bottom-0 left-0"
+            >
+              <h2
+                class="font-serif text-4xl italic mb-1 text-white tracking-tight"
+              >
+                Seulgi
+              </h2>
+              <div
+                class="flex items-center gap-3 text-xs tracking-widest uppercase text-white/90"
+              >
+                <span class="px-2 py-0.5 backdrop-blur-sm rounded bg-white/10"
+                  >Main Dancer</span
+                >
+                <span>Lead Vocal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WENDY SECTION -->
+    <section
+      id="wendy"
+      class="section min-h-screen flex items-center justify-center relative py-20 overflow-hidden"
+    >
+      <div
+        class="absolute right-0 top-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-radial-gradient from-rv-wendy/5 to-transparent opacity-50 animate-pulse-subtle pointer-events-none"
+      ></div>
+      <div
+        class="container max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10"
+      >
+        <div
+          class="lg:col-span-5 relative group section-card opacity-0 translate-y-12 transition-all duration-1000 ease-out"
+        >
+          <div
+            class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden glass-panel glass-card-hover transition-all duration-700"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-rv-wendy/10 to-transparent mix-blend-overlay z-10"
+            ></div>
+            <img
+              src="https://i.pinimg.com/1200x/66/42/51/664251da747791505776a44c6d7fb0d3.jpg"
+              alt="Wendy - Main Vocal"
+              class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-1000 grayscale-[20%] group-hover:grayscale-0"
+            />
+            <div
+              class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-rv-wendy/90 via-rv-wendy/30 to-transparent"
+            >
+              <h2
+                class="font-serif text-4xl italic mb-1 text-white tracking-tight"
+              >
+                Wendy
+              </h2>
+              <div
+                class="flex items-center gap-3 text-xs tracking-widest uppercase text-white/90"
+              >
+                <span class="px-2 py-0.5 backdrop-blur-sm rounded bg-white/10"
+                  >Main Vocal</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute -bottom-4 -left-4 w-24 h-24 border border-rv-wendy/20 rounded-full animate-float-delayed opacity-40"
+          ></div>
+        </div>
+        <div
+          class="lg:col-span-7 space-y-8 text-left lg:pl-12 section-text opacity-0 translate-y-8 transition-all duration-1000 delay-300"
+        >
+          <div class="flex items-center gap-4">
+            <div class="h-[1px] w-16 bg-rv-wendy/50"></div>
+            <span
+              class="text-rv-wendy text-xs tracking-[0.3em] uppercase font-medium"
+              >The Voice</span
+            >
+          </div>
+          <h3
+            class="font-serif text-5xl lg:text-7xl leading-tight text-white/90 tracking-tight"
+          >
+            Crystalline <span class="italic text-white/50">Resonance</span>
+          </h3>
+          <p
+            class="text-lg font-extralight leading-relaxed max-w-md text-slate-300"
+          >
+            A vocal tone that ripples through the air like water. Pure,
+            powerful, and healing. The emotional anchor of the velvet concept.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOY SECTION -->
+    <section
+      id="joy"
+      class="section min-h-screen flex items-center justify-center relative py-20"
+    >
+      <div
+        class="container max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+      >
+        <div
+          class="lg:col-span-7 order-2 lg:order-1 space-y-8 text-left lg:pr-12 section-text opacity-0 translate-y-8 transition-all duration-1000 delay-300"
+        >
+          <div class="flex items-center gap-4">
+            <span
+              class="text-rv-joy text-xs tracking-[0.3em] uppercase font-medium"
+              >The Siren</span
+            >
+            <div class="h-[1px] w-16 bg-rv-joy/50"></div>
+          </div>
+          <h3
+            class="font-serif text-5xl lg:text-7xl leading-tight text-white/90 tracking-tight"
+          >
+            Intoxicating <br /><span class="italic text-white/50">Charm</span>
+          </h3>
+          <p
+            class="text-lg font-extralight leading-relaxed max-w-md text-slate-300"
+          >
+            Fresh like green apples, mysterious like a deep forest. She brings a
+            dynamic edge and unforgettable presence to every frame.
+          </p>
+        </div>
+        <div
+          class="lg:col-span-5 order-1 lg:order-2 relative group section-card opacity-0 translate-y-12 transition-all duration-1000 ease-out"
+        >
+          <div
+            class="absolute top-0 -right-8 w-full h-full pointer-events-none z-0"
+          >
+            <svg
+              viewBox="0 0 100 100"
+              class="w-full h-full opacity-40 stroke-rv-joy stroke-[0.5] fill-none"
+            >
+              <path d="M10,10 Q50,5 90,90"></path>
+              <rect
+                x="80"
+                y="10"
+                width="10"
+                height="10"
+                class="fill-rv-joy/20"
+              ></rect>
+            </svg>
+          </div>
+          <div
+            class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden glass-panel glass-card-hover transition-all duration-700"
+          >
+            <img
+              src="https://i.pinimg.com/1200x/eb/a0/f7/eba0f7a506dade39ec3a59431fb9cbcf.jpg"
+              alt="Joy - Lead Rapper and Sub Vocal"
+              class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-1000 grayscale-[20%] group-hover:grayscale-0"
+            />
+            <div
+              class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-rv-joy/90 via-rv-joy/30 to-transparent"
+            >
+              <h2
+                class="font-serif text-4xl italic mb-1 text-white tracking-tight"
+              >
+                Joy
+              </h2>
+              <div
+                class="flex items-center gap-3 text-xs tracking-widest uppercase text-white/90"
+              >
+                <span class="px-2 py-0.5 backdrop-blur-sm rounded bg-white/10"
+                  >Lead Rapper</span
+                >
+                <span>Sub Vocal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- YERI SECTION -->
+    <section
+      id="yeri"
+      class="section min-h-screen flex items-center justify-center relative py-20"
+    >
+      <div
+        class="container max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+      >
+        <div
+          class="lg:col-span-5 relative group section-card opacity-0 translate-y-12 transition-all duration-1000 ease-out"
+        >
+          <div
+            class="absolute inset-0 bg-rv-yeri/10 rounded-[2rem] rotate-3 scale-95 transition-transform duration-500 group-hover:rotate-6"
+          ></div>
+          <div
+            class="absolute inset-0 rounded-[2rem] -rotate-2 scale-95 transition-transform duration-500 group-hover:-rotate-3 bg-white/5"
+          ></div>
+          <div
+            class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden glass-panel glass-card-hover transition-all duration-700"
+          >
+            <img
+              src="https://i.pinimg.com/1200x/a1/b6/9e/a1b69e25892823e261aa870eb55196ac.jpg"
+              alt="Yeri - Maknae and Sub Rapper"
+              class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-1000 grayscale-[20%] group-hover:grayscale-0"
+            />
+            <div
+              class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-rv-yeri/90 via-rv-yeri/30 to-transparent"
+            >
+              <h2
+                class="font-serif text-4xl italic mb-1 text-white tracking-tight"
+              >
+                Yeri
+              </h2>
+              <div
+                class="flex items-center gap-3 text-xs tracking-widest uppercase text-white/90"
+              >
+                <span class="px-2 py-0.5 backdrop-blur-sm rounded bg-white/10"
+                  >Maknae</span
+                >
+                <span>Sub Rapper</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="lg:col-span-7 space-y-8 text-left lg:pl-12 section-text opacity-0 translate-y-8 transition-all duration-1000 delay-300"
+        >
+          <div class="flex items-center gap-4">
+            <div class="h-[1px] w-16 bg-rv-yeri/50"></div>
+            <span
+              class="text-rv-yeri text-xs tracking-[0.3em] uppercase font-medium"
+              >The Muse</span
+            >
+          </div>
+          <h3
+            class="font-serif text-5xl lg:text-7xl leading-tight text-white/90 tracking-tight"
+          >
+            Youthful <span class="italic text-white/50">Audacity</span>
+          </h3>
+          <p
+            class="text-lg font-extralight leading-relaxed max-w-md text-slate-300"
+          >
+            Bold spirits and bright ideas. She completes the circle with a chic,
+            modern sensibility that bridges the gap between fantasy and reality.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="py-12 text-center text-xs tracking-widest uppercase font-light text-white/20"
+    >
+      <p>© SM Entertainment. Fan Concept Design.</p>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

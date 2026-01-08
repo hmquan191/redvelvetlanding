@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+:root {
+  --rv-bg: #0f172a;
+
+  --rv-irene: #c21e56;
+  --rv-seulgi: #eeb211;
+  --rv-wendy: #0070b8;
+  --rv-joy: #32cd32;
+  --rv-yeri: #6c3082;
+
+  --rv-font-primary: "Playfair Display", ui-serif, Georgia, serif;
+  --rv-font-secondary: "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --rv-font-logo: "Mona Sans", "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("./fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("./fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("./fonts/Mona_Sans/MonaSans-VariableFont_wdth,wght.ttf")
+    format("truetype");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: auto;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--rv-bg);
+    color: rgba(255, 255, 255, 0.92);
+    font-family: var(--rv-font-primary);
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Hide scrollbars globally (keep scrolling enabled) */
+  html,
+  body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/legacy Edge */
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none; /* Chrome/Safari */
+  }
+
+  ::selection {
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+@layer components {
+  .rv-section {
+    @apply relative w-full;
+  }
+
+  .rv-title {
+    font-family: var(--rv-font-primary);
+    @apply text-balance text-5xl leading-[1.03] tracking-[-0.02em] text-white md:text-7xl;
+  }
+
+  .rv-subtitle {
+    font-family: var(--rv-font-secondary);
+    @apply text-pretty text-base leading-relaxed text-white/75 md:text-lg;
+  }
+
+  .rv-pill {
+    font-family: var(--rv-font-secondary);
+    @apply rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/70;
+  }
+
+  .rv-logo-text {
+    font-family: var(--rv-font-logo);
+    @apply text-xl font-semibold tracking-tight text-white;
+    text-shadow: 0 0 22px rgba(255, 255, 255, 0.12);
+  }
+
+  .rv-opening-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-[rgba(15,23,42,0.92)] backdrop-blur-sm;
+  }
+
+  .rv-opening-title {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .rv-opening-title-text {
+    font-family: var(--rv-font-logo);
+    @apply text-5xl font-semibold tracking-[0.18em] text-white md:text-6xl;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.16);
+  }
+
+  .rv-cards-overlay {
+    @apply fixed inset-0 z-40 flex items-center justify-center;
+  }
+
+  .rv-cards-grid {
+    @apply grid grid-cols-5 gap-4 px-6;
+  }
+
+  .rv-card {
+    @apply relative h-[210px] w-[150px] cursor-pointer rounded-2xl border border-white/10 bg-white/5 p-1 shadow-[0_10px_45px_rgba(0,0,0,0.35)];
+  }
+
+  .rv-card-glow {
+    @apply pointer-events-none absolute inset-0 rounded-2xl;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 0 30px rgba(255, 255, 255, 0.1), 0 0 40px rgba(255, 255, 255, 0.05);
+    background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--rv-accent) 28%, transparent),
+      transparent
+    );
+    opacity: 0.85;
+  }
+
+  .rv-member-panel {
+    background: radial-gradient(
+      1200px 600px at 50% 30%,
+      rgba(255, 255, 255, 0.05),
+      transparent 60%
+    );
+  }
+
+  .rv-tag {
+    font-family: var(--rv-font-secondary);
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/70;
+  }
+
+  .rv-member-name {
+    font-family: var(--rv-font-primary);
+    @apply text-4xl leading-tight tracking-tight text-white md:text-5xl;
+  }
+
+  .rv-member-title {
+    font-family: var(--rv-font-primary);
+    @apply text-xl leading-relaxed text-white/80 md:text-2xl;
+  }
+
+  .rv-member-card {
+    @apply overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-1;
+    box-shadow: 0 22px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .rv-dotline {
+    @apply h-px w-10 bg-white/15;
+  }
+
+  .rv-accent-label {
+    font-family: var(--rv-font-secondary);
+    @apply text-xs uppercase tracking-[0.18em] text-white/55;
+  }
+
+  .rv-ending-title {
+    font-family: var(--rv-font-primary);
+    @apply text-4xl tracking-tight text-white md:text-5xl;
+  }
+
+  .glass-panel {
+    @apply border border-white/10 bg-white/5 backdrop-blur-md;
+    box-shadow: 0 18px 70px rgba(0, 0, 0, 0.45);
+  }
+}

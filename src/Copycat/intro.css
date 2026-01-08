@@ -1,0 +1,57 @@
+/* ============================================
+   Intro Screen & Fan Animation
+   ============================================ */
+#intro-screen {
+  transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+#intro-screen.slide-up-reveal {
+  transform: translateY(-100%) rotate(-5deg) scale(1.1);
+  border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.fan-card {
+  transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* Sleeker ease-out */
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  /* Default spread factor */
+  --spread-factor: 1;
+  --scale-factor: 1;
+}
+
+.fan-card.active {
+  opacity: 1;
+  transform: translateX(calc(var(--translate) * var(--spread-factor))) rotate(var(--rotate)) scale(var(--scale-factor));
+}
+
+.fan-card:hover {
+  z-index: 50 !important;
+  transform: translateX(calc(var(--translate) * var(--spread-factor))) rotate(var(--rotate)) scale(1.1) translateY(-20px);
+  box-shadow: 0 20px 40px -5px rgba(236, 72, 153, 0.4);
+  border-color: rgba(255, 255, 255, 0.8);
+  transition-duration: 0.4s; /* Faster response on hover */
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  #intro-text {
+    font-size: 12vw !important; /* Responsive font size */
+  }
+  
+  .fan-card {
+    width: 140px; /* Smaller cards */
+    height: 210px;
+    --spread-factor: 0.4; /* Much tighter spread */
+    --scale-factor: 0.9;
+  }
+  
+  /* Adjust perspective for mobile */
+  .perspective-1000 {
+    perspective: 600px;
+  }
+}
