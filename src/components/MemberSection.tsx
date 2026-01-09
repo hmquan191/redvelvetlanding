@@ -106,7 +106,7 @@ function MemberPanel({
                 src={member.image}
                 alt={`${member.name} portrait`}
                 className={[
-                  "object-[50%_20%] transition-transform duration-1000 grayscale-20 group-hover:grayscale-0 group-hover:scale-105 opacity-90 w-full h-full object-cover",
+                  "object-[50%_20%] transition-transform duration-1000 group-hover:grayscale-0 group-hover:scale-105 opacity-90 w-full h-full object-cover",
                   inView ? "grayscale-0 scale-105" : "",
                 ].join(" ")}
                 loading="lazy"
