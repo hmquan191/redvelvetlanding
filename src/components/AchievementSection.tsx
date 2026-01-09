@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import * as React from "react";
 
-const { useMemo, useState } = React;
+const { useEffect, useMemo, useRef, useState } = React;
 
 type Stat = {
   label: string;
@@ -106,9 +106,48 @@ function SprayBurst({
 function StatCard({ stat, index }: { stat: Stat; index: number }) {
   const [isActive, setIsActive] = useState(false);
   const sprayColor = "#FFA38C";
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { amount: 0.55, margin: "-10% 0px -10% 0px" });
+
+  const [displayValue, setDisplayValue] = useState(stat.value);
+
+  useEffect(() => {
+    // Parse values like: "85", "12", "3.3B"
+    const match = String(stat.value).trim().match(/^(\d+(?:\.\d+)?)(.*)$/);
+    if (!match) {
+      setDisplayValue(stat.value);
+      return;
+    }
+
+    const target = Number(match[1]);
+    const suffix = match[2] ?? "";
+    const decimals = (match[1].split(".")[1] ?? "").length;
+
+    const format = (n: number) => `${n.toFixed(decimals)}${suffix}`;
+
+    if (!inView) {
+      setDisplayValue(format(0));
+      return;
+    }
+
+    let raf = 0;
+    const durationMs = 600;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / durationMs);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      setDisplayValue(format(target * eased));
+      if (t < 1) raf = window.requestAnimationFrame(tick);
+    };
+
+    raf = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(raf);
+  }, [inView, stat.value]);
 
   return (
-    <div className="relative p-2 sm:p-4">
+    <div ref={ref} className="relative p-2 sm:p-4">
       <div className="min-w-0">
         <div className="text-sm sm:text-base md:text-lg uppercase tracking-[0.22em] text-white/70 [font-family:var(--rv-font-logo)]">
           {stat.label}
@@ -135,7 +174,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
               transition: "text-shadow 240ms ease",
             }}
           >
-            {stat.value}
+            {displayValue}
           </span>
 
           {/* hover spray */}
@@ -172,6 +211,13 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
   );
 }
 
+type MusicShowRow = {
+  no: number;
+  show: string;
+  wins: string;
+  image: string;
+};
+
 export default function AchievementSection() {
   const stats = useMemo<Stat[]>(
     () => [
@@ -183,6 +229,52 @@ export default function AchievementSection() {
     ],
     []
   );
+
+  const musicShowData = useMemo<MusicShowRow[]>(
+    () => [
+      { no: 1, show: "Inkigayo", wins: "19", image: "/img/music_show/inkigayo.jpg" },
+      { no: 2, show: "M COUNTDOWN", wins: "16", image: "/img/music_show/mcountdown.jpg" },
+      { no: 3, show: "Music Bank", wins: "15", image: "/img/music_show/musicbank.jpg" },
+      { no: 4, show: "Show Champion", wins: "14", image: "/img/music_show/showchampion.jpg" },
+      { no: 5, show: "Show! Music Core", wins: "12", image: "/img/music_show/musicore.jpg" },
+      { no: 6, show: "THE SHOW", wins: "8", image: "/img/music_show/theshow.jpg" },
+    ],
+    []
+  );
+
+  const [hoveredShow, setHoveredShow] = useState<MusicShowRow | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({
+      x: e.clientX,
+      y: e.clientY,
+    });
+  };
+
+  // Smart positioning: flip image to other side if near edge
+  const imageWidth = 200;
+  const imageHeight = 180;
+  const offset = 20;
+
+  const getImagePosition = () => {
+    const vw = typeof window !== "undefined" ? window.innerWidth : 1920;
+    const vh = typeof window !== "undefined" ? window.innerHeight : 1080;
+
+    // Horizontal: if image would overflow right, show on left of cursor
+    const showOnLeft = mousePos.x + offset + imageWidth > vw;
+    const left = showOnLeft
+      ? mousePos.x - offset - imageWidth
+      : mousePos.x + offset;
+
+    // Vertical: if image would overflow bottom, show above cursor
+    const showAbove = mousePos.y + imageHeight / 2 > vh;
+    const top = showAbove
+      ? mousePos.y - imageHeight - offset
+      : mousePos.y - imageHeight / 2;
+
+    return { left, top };
+  };
 
   return (
     <section id="achievements" className="rv-section relative overflow-hidden">
@@ -216,7 +308,7 @@ export default function AchievementSection() {
           <div className="relative">
             <div className="flex items-center gap-4">
               <div className="h-px w-16 bg-[#FFA38C]/15" />
-              <span className="text-xs text-[#FFA38C] tracking-[0.6em] uppercase [font-family:var(--rv-font-secondary)]">
+              <span className="mt-5 text-xs text-[#FFA38C] tracking-[0.6em] uppercase [font-family:var(--rv-font-secondary)]">
                 Achievements
               </span>
             </div>
@@ -253,6 +345,61 @@ export default function AchievementSection() {
             ))}
           </div>
         </motion.div>
+      </div>
+
+      {/* Hover image preview - fixed position, follows cursor smartly */}
+      <AnimatePresence>
+        {hoveredShow ? (
+          <motion.div
+            key={hoveredShow.no}
+            className="pointer-events-none fixed z-[9999]"
+            style={getImagePosition()}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+          >
+            <div className="overflow-hidden rounded-2xl border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+              <img
+                src={hoveredShow.image}
+                alt={hoveredShow.show}
+                className="h-[180px] w-[220px] object-cover"
+              />
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      {/* Full-bleed music show wins table */}
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-16">
+        <div className="overflow-x-auto" onMouseMove={handleMouseMove}>
+          <table
+            className="w-full border-collapse"
+            style={{ fontFamily: "var(--rv-font-achievement)" }}
+          >
+            <thead>
+              <tr className="text-sm font-extrabold border-b border-white/10 text-white/50 text-xs uppercase tracking-[0.25em]">
+                <th className="px-6 py-4 font-medium">No.</th>
+                <th className="px-6 py-4 font-medium">Music Show</th>
+                <th className="px-6 py-4 font-medium"># of Wins</th>
+              </tr>
+            </thead>
+            <tbody>
+              {musicShowData.map((row) => (
+                <tr
+                  key={row.no}
+                  className="text-3xl font-extrabold border-b border-white/10 text-white transition-colors duration-150 hover:bg-[#FFA38C] hover:text-black cursor-pointer"
+                  onMouseEnter={() => setHoveredShow(row)}
+                  onMouseLeave={() => setHoveredShow(null)}
+                >
+                  <td className="px-6 py-5 text-center">{row.no}</td>
+                  <td className="px-6 py-5 text-center">{row.show}</td>
+                  <td className="px-6 py-5 text-center">{row.wins}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );

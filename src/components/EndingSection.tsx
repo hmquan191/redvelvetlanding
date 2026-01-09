@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const ENDING_TIMING = {
   textInMs: 900,
-  starDelayMs: 450,
+  starDelayMs: 500,
   starTravelMs: 900,
   impactAt: 0.58, // fraction of travel where the star "hits" the text
   brightenMs: 520,

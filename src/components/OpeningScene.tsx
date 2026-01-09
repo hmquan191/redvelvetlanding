@@ -290,7 +290,8 @@ export default function OpeningScene({
         {showOverlay ? (
           <motion.div
             className="rv-opening-overlay"
-            initial={{ opacity: 0 }}
+            // Mount fully opaque so nothing behind flashes on first paint.
+            initial={{ opacity: 1 }}
             animate={
               introSlideUp
                 ? {
