@@ -18,6 +18,29 @@ function App() {
   // Easter egg: "rv" key sequence toggles background music
   const audioRef = useRef(null);
   const lastKeyRef = useRef("");
+  const [isNowPlayingVisible, setIsNowPlayingVisible] = useState(false);
+  const [nowPlayingNonce, setNowPlayingNonce] = useState(0);
+  const nowPlayingTimerRef = useRef(null);
+
+  const showNowPlaying = useCallback(() => {
+    setIsNowPlayingVisible(true);
+    setNowPlayingNonce((n) => n + 1);
+  }, []);
+
+  useEffect(() => {
+    if (!isNowPlayingVisible) return;
+    if (nowPlayingTimerRef.current) {
+      window.clearTimeout(nowPlayingTimerRef.current);
+    }
+    nowPlayingTimerRef.current = window.setTimeout(() => {
+      setIsNowPlayingVisible(false);
+    }, 3000);
+    return () => {
+      if (nowPlayingTimerRef.current) {
+        window.clearTimeout(nowPlayingTimerRef.current);
+      }
+    };
+  }, [nowPlayingNonce, isNowPlayingVisible]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -29,6 +52,7 @@ function App() {
         }
         if (audioRef.current.paused) {
           audioRef.current.play();
+          showNowPlaying();
         } else {
           audioRef.current.pause();
         }
@@ -37,7 +61,7 @@ function App() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [showNowPlaying]);
 
   const handleIntroDone = useCallback(() => {
     setIsIntroActive(false);
@@ -45,13 +69,17 @@ function App() {
   }, []);
 
   // Trigger logo "shine" when user returns to the hero section (after intro).
-  useEffect(() => {
-    const wasInView = prevHeroInView.current;
-    if (!isIntroActive && isHeroInView && !wasInView) {
-      setLogoShineNonce((n) => n + 1);
-    }
-    prevHeroInView.current = isHeroInView;
-  }, [isHeroInView, isIntroActive]);
+  const handleHeroInViewChange = useCallback(
+    (inView) => {
+      setIsHeroInView(inView);
+      const wasInView = prevHeroInView.current;
+      if (!isIntroActive && inView && !wasInView) {
+        setLogoShineNonce((n) => n + 1);
+      }
+      prevHeroInView.current = inView;
+    },
+    [isIntroActive]
+  );
 
   return (
     <ReactLenis
@@ -71,8 +99,18 @@ function App() {
         />
         <OpeningScene isActive={isIntroActive} onDone={handleIntroDone} />
 
+        <div
+          className={`rv-now-playing ${
+            isNowPlayingVisible ? "is-visible" : ""
+          }`}
+          role="status"
+          aria-live="polite"
+        >
+          Now playing: Cosmic (Instrumental)
+        </div>
+
         <main>
-          <HeroSection onInViewChange={setIsHeroInView} />
+          <HeroSection onInViewChange={handleHeroInViewChange} />
           <section id="members" className="rv-section">
             <MemberSection />
           </section>

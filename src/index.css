@@ -103,6 +103,17 @@
     @apply relative w-full;
   }
 
+  .rv-now-playing {
+    font-family: var(--rv-font-primary);
+    @apply fixed bottom-6 right-6 z-[9998] rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm tracking-wide text-white/90 backdrop-blur-md;
+    @apply pointer-events-none opacity-0 translate-y-2 transition-all duration-500;
+    box-shadow: 0 18px 70px rgba(0, 0, 0, 0.45);
+  }
+
+  .rv-now-playing.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+
   .rv-title {
     font-family: var(--rv-font-primary);
     @apply text-balance text-5xl leading-[1.03] tracking-[-0.02em] text-white md:text-7xl;
