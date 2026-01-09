@@ -1,12 +1,21 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useMemo, useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useEffect, useMemo, useRef } from "react";
 import React from "react";
-export default function HeroSection() {
+export default function HeroSection({
+  onInViewChange,
+}: {
+  onInViewChange?: (inView: boolean) => void;
+}) {
   const ref = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
+
+  const inView = useInView(ref, { margin: "-15% 0px -70% 0px" });
+  useEffect(() => {
+    onInViewChange?.(inView);
+  }, [inView, onInViewChange]);
 
   const titleY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const hazeOpacity = useTransform(scrollYProgress, [0, 1], [0.85, 0.15]);
@@ -147,7 +156,7 @@ export default function HeroSection() {
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center px-6 py-24 text-center">
         <div className="inline-block mb-4">
-          <span className="text-xs tracking-[0.6em] uppercase border-b pb-2 text-white/70 border-white/20">
+          <span className="text-xs tracking-[0.6em] uppercase border-b pb-2 text-white/70 border-white/20 hover:text-white">
             The ReVe Festival
           </span>
         </div>

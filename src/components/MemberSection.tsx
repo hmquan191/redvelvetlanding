@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import * as React from "react";
 
 const { useCallback, useEffect, useMemo, useRef, useState } = React;
@@ -148,6 +148,17 @@ export default function MemberSection({
     margin: "-25% 0px -25% 0px",
   });
 
+  // Chapter transition: scale down as we scroll past the last member
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["end end", "end start"],
+  });
+
+  // Scale from 1 → 0.7 and fade slightly as we exit
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.7]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.85]);
+  const borderRadius = useTransform(scrollYProgress, [0, 1], [0, 48]);
+
   const members = useMemo<Member[]>(
     () => [
       {
@@ -269,27 +280,38 @@ export default function MemberSection({
         </nav>
       ) : null}
 
-      <section className="relative pt-32 pb-16 flex items-center justify-center">
-        <div className="text-center z-20 px-6 space-y-4">
-          <span className="text-xs tracking-[0.4em] uppercase text-white/50 border-b pb-1 [font-family:var(--rv-font-secondary)]">
-            Meet the Queens
-          </span>
-          <h1 className="[font-family:var(--rv-font-primary)] text-5xl md:text-7xl tracking-tight text-white font-medium">
-            <span className="italic font-light opacity-90">The</span> Members
-          </h1>
-        </div>
-      </section>
+      {/* Chapter transition wrapper - scales down as we exit */}
+      <motion.div
+        style={{
+          scale,
+          opacity,
+          borderRadius,
+          transformOrigin: "center center",
+        }}
+        className="relative overflow-hidden"
+      >
+        <section className="relative pt-32 pb-16 flex items-center justify-center">
+          <div className="text-center z-20 px-6 space-y-4">
+            <span className="text-xs tracking-[0.4em] uppercase text-white/50 border-b pb-1 [font-family:var(--rv-font-secondary)]">
+              Meet the Queens
+            </span>
+            <h1 className="[font-family:var(--rv-font-primary)] text-5xl md:text-7xl tracking-tight text-white font-medium">
+              <span className="italic font-light opacity-90">The</span> Members
+            </h1>
+          </div>
+        </section>
 
-      <div className="rv-members">
-        {members.map((m, idx) => (
-          <MemberPanel
-            key={m.id}
-            member={m}
-            onActive={handleActive}
-            reverse={idx % 2 === 1}
-          />
-        ))}
-      </div>
+        <div className="rv-members">
+          {members.map((m, idx) => (
+            <MemberPanel
+              key={m.id}
+              member={m}
+              onActive={handleActive}
+              reverse={idx % 2 === 1}
+            />
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
