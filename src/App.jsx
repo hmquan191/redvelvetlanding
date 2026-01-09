@@ -4,13 +4,18 @@ import { useCallback, useState } from "react";
 import OpeningScene from "./components/OpeningScene";
 import HeroSection from "./components/HeroSection";
 import MemberSection from "./components/MemberSection";
+import AchievementSection from "./components/AchievementSection";
 import EndingSection from "./components/EndingSection";
 import Logo from "./components/Logo";
 
 function App() {
   const [isIntroActive, setIsIntroActive] = useState(true);
+  const [logoShineNonce, setLogoShineNonce] = useState(0);
 
-  const handleIntroDone = useCallback(() => setIsIntroActive(false), []);
+  const handleIntroDone = useCallback(() => {
+    setIsIntroActive(false);
+    setLogoShineNonce((n) => n + 1);
+  }, []);
 
   return (
     <ReactLenis
@@ -24,7 +29,7 @@ function App() {
       }}
     >
       <div className="rv-app">
-        <Logo />
+        <Logo hidden={isIntroActive} shineNonce={logoShineNonce} />
         <OpeningScene isActive={isIntroActive} onDone={handleIntroDone} />
 
         <main>
@@ -32,6 +37,7 @@ function App() {
           <section id="members" className="rv-section">
             <MemberSection />
           </section>
+          <AchievementSection />
           <EndingSection />
         </main>
       </div>

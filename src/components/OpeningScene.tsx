@@ -191,22 +191,22 @@ export default function OpeningScene({
       "'Cinzel', serif",
       "'Dancing Script', cursive",
       "'Anton', sans-serif",
-      "'Abril Fatface', cursive",
-      "'Permanent Marker', cursive",
-      "'Roboto Slab', serif",
-      "'Pacifico', cursive",
-      "'Oswald', sans-serif",
-      "'Lobster', cursive",
-      "'Shadows Into Light', cursive",
-      "'Monoton', cursive",
-      "'Righteous', cursive",
-      "'Bangers', cursive",
-      "'Creepster', cursive",
-      "'Gloria Hallelujah', cursive",
-      "'Courier New', monospace",
+      // "'Abril Fatface', cursive",
+      // "'Permanent Marker', cursive",
+      // "'Roboto Slab', serif",
+      // "'Pacifico', cursive",
+      // "'Oswald', sans-serif",
+      // "'Lobster', cursive",
+      // "'Shadows Into Light', cursive",
+      // "'Monoton', cursive",
+      // "'Righteous', cursive",
+      // "'Bangers', cursive",
+      // "'Creepster', cursive",
+      // "'Gloria Hallelujah', cursive",
+      // "'Courier New', monospace",
     ];
 
-    const totalDuration = 2500;
+    const totalDuration = 2000;
     const intervalDuration = 100;
     const steps = Math.floor(totalDuration / intervalDuration);
     let fontIndex = 0;

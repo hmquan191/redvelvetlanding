@@ -14,6 +14,10 @@
     "Segoe UI", sans-serif;
   --rv-font-logo: "Mona Sans", "Inter", ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
+  --rv-font-achievement: "Mona Sans Variable", "Arial", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --rv-font-stamp: "Mallia", "Mona Sans", "Inter", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
 }
 
 @font-face {
@@ -39,6 +43,14 @@
   src: url("./fonts/Mona_Sans/MonaSans-VariableFont_wdth,wght.ttf")
     format("truetype");
   font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mallia";
+  src: url("./fonts/mallia-font/MalliaRegular-LVDBg.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -113,7 +125,26 @@
   }
 
   .rv-opening-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center bg-[rgba(15,23,42,0.92)] backdrop-blur-sm;
+    @apply fixed inset-0 flex items-center justify-center;
+    z-index: 9999;
+    isolation: isolate;
+    /* Fully opaque base so nothing behind can bleed through */
+    background: radial-gradient(
+        900px 520px at 50% 52%,
+        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0) 55%
+      ),
+      radial-gradient(
+        720px 520px at 20% 22%,
+        rgba(238, 178, 17, 0.12),
+        rgba(238, 178, 17, 0) 58%
+      ),
+      radial-gradient(
+        720px 520px at 82% 22%,
+        rgba(108, 48, 130, 0.12),
+        rgba(108, 48, 130, 0) 58%
+      ),
+      linear-gradient(180deg, #070b16 0%, #0a1023 55%, #060914 100%);
   }
 
   .rv-opening-title {
