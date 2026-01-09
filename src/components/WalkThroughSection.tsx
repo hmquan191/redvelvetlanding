@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 import * as React from "react";
+import { ReactLenis } from "lenis/react";
 
 type GalleryItem =
   | { type: "image"; src: string; position: "top" | "center" | "bottom"; size: "sm" | "md" | "lg" }
@@ -16,31 +17,31 @@ export default function WalkThroughSection() {
 
   // Horizontal translation: 0% → -78% of track width as we scroll
   // Increased to cover more content with the larger/more images
-  const trackX = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
+  const trackX = useTransform(scrollYProgress, [0, 1], ["0%", "-93%"]);
 
   // Gallery items with scattered positioning
   const galleryItems = useMemo<GalleryItem[]>(
     () => [
       { type: "image", src: "/img/team_pic/team_cc3.jpg", position: "top", size: "lg" },
-      { type: "text", content: "1, 2! Happiness! Hello, this is Red Velvet!", position: "bottom" },
+      { type: "text", content: "Happiness! Hello, this is Red Velvet.", position: "bottom" },
       { type: "image", src: "/img/team_pic/3.webp", position: "bottom", size: "lg" },
       { type: "image", src: "/img/team_pic/4.webp", position: "center", size: "lg" },
-      { type: "text", content: "RED VELVET IMITA", position: "top" },
+      { type: "text", content: "Do you know Red Velvet? I'm a Korean Singer", position: "center" },
       { type: "image", src: "/img/team_pic/5.webp", position: "top", size: "lg" },
       { type: "image", src: "/img/team_pic/6.webp", position: "bottom", size: "md" },
-      { type: "text", content: "RED VELVET ", position: "center" },
+      { type: "text", content: "SM water tastes like water", position: "center" },
       { type: "image", src: "/img/team_pic/7.webp", position: "center", size: "lg" },
       { type: "image", src: "/img/team_pic/9.webp", position: "top", size: "sm" },
       { type: "image", src: "/img/team_pic/10.webp", position: "bottom", size: "lg" },
-      { type: "text", content: "NEAR LAST", position: "top" },
+      { type: "text", content: "Because ReVeluvs exist,\nwe exist", position: "center" },
       { type: "image", src: "/img/team_pic/11.webp", position: "center", size: "sm" },
       { type: "image", src: "/img/team_pic/12.webp", position: "top", size: "lg" },
       // { type: "image", src: "/img/team_pic/13.webp", position: "bottom", size: "sm" },
       { type: "image", src: "/img/team_pic/14.webp", position: "center", size: "md" },
-      { type: "text", content: "NEAR LAST", position: "bottom" },
+      // { type: "text", content: "I don't have a daughter like you", position: "bottom" },
 
       { type: "image", src: "/img/team_pic/team_cc2.jpg", position: "top", size: "md" },
-      { type: "image", src: "/img/team_pic/team_cc2.jpg", position: "top", size: "md" },
+      // { type: "image", src: "/img/team_pic/team_cc2.jpg", position: "top", size: "md" },
 
     ],
     []
@@ -76,6 +77,15 @@ export default function WalkThroughSection() {
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Progress bar */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 z-50 h-[4px] rounded-full  origin-left"
+          style={{
+            scaleX: scrollYProgress,
+            backgroundColor: "#ffa38c",
+          }}
+        />
+
         {/* Subtle backdrop glow */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/4 top-1/3 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(194,30,86,0.12),transparent)] blur-3xl" />
@@ -102,7 +112,7 @@ export default function WalkThroughSection() {
                   transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <p
-                    className="max-w-[280px] text-lg md:text-2xl font-light leading-relaxed text-white/70 italic"
+                    className="max-w-[280px] whitespace-pre-line text-lg md:text-2xl font-light leading-relaxed text-white/70 italic"
                     style={{ fontFamily: "var(--rv-font-primary)" }}
                   >
                     {item.content}

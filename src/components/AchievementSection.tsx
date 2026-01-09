@@ -244,34 +244,63 @@ export default function AchievementSection() {
 
   const [hoveredShow, setHoveredShow] = useState<MusicShowRow | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const hoverTimeoutRef = useRef<number | null>(null);
+
+  // Preload all music show images on mount
+  useEffect(() => {
+    const imagePromises = musicShowData.map((row) => {
+      return new Promise<void>((resolve) => {
+        const img = new Image();
+        img.src = row.image;
+        img.onload = () => resolve();
+        img.onerror = () => resolve(); // Don't block on error
+      });
+    });
+
+    Promise.all(imagePromises).then(() => setImagesLoaded(true));
+  }, [musicShowData]);
+
+  // Cleanup hover timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        window.clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({
-      x: e.clientX,
-      y: e.clientY,
+    // Use requestAnimationFrame for smoother updates
+    requestAnimationFrame(() => {
+      setMousePos({
+        x: e.clientX,
+        y: e.clientY,
+      });
     });
   };
 
   // Smart positioning: flip image to other side if near edge
-  const imageWidth = 200;
+  const imageWidth = 220;
   const imageHeight = 180;
-  const offset = 20;
+  const offset = 24;
 
   const getImagePosition = () => {
     const vw = typeof window !== "undefined" ? window.innerWidth : 1920;
     const vh = typeof window !== "undefined" ? window.innerHeight : 1080;
 
     // Horizontal: if image would overflow right, show on left of cursor
-    const showOnLeft = mousePos.x + offset + imageWidth > vw;
+    const showOnLeft = mousePos.x + offset + imageWidth + 20 > vw;
     const left = showOnLeft
       ? mousePos.x - offset - imageWidth
       : mousePos.x + offset;
 
-    // Vertical: if image would overflow bottom, show above cursor
-    const showAbove = mousePos.y + imageHeight / 2 > vh;
-    const top = showAbove
-      ? mousePos.y - imageHeight - offset
-      : mousePos.y - imageHeight / 2;
+    // Vertical: center on cursor, but clamp to viewport
+    let top = mousePos.y - imageHeight / 2;
+    
+    // Clamp to viewport bounds with padding
+    const padding = 20;
+    top = Math.max(padding, Math.min(top, vh - imageHeight - padding));
 
     return { left, top };
   };
@@ -359,11 +388,12 @@ export default function AchievementSection() {
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
           >
-            <div className="overflow-hidden rounded-2xl border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+            <div className="overflow-hidden rounded-2xl border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.6)] bg-black/50">
               <img
                 src={hoveredShow.image}
                 alt={hoveredShow.show}
                 className="h-[180px] w-[220px] object-cover"
+                draggable={false}
               />
             </div>
           </motion.div>
@@ -389,8 +419,20 @@ export default function AchievementSection() {
                 <tr
                   key={row.no}
                   className="text-3xl font-extrabold border-b border-white/10 text-white transition-colors duration-150 hover:bg-[#FFA38C] hover:text-black cursor-pointer"
-                  onMouseEnter={() => setHoveredShow(row)}
-                  onMouseLeave={() => setHoveredShow(null)}
+                  onMouseEnter={() => {
+                    // Clear any pending timeout
+                    if (hoverTimeoutRef.current) {
+                      window.clearTimeout(hoverTimeoutRef.current);
+                    }
+                    // Set new hover immediately for responsive feel
+                    setHoveredShow(row);
+                  }}
+                  onMouseLeave={() => {
+                    // Small delay before hiding to prevent flicker between rows
+                    hoverTimeoutRef.current = window.setTimeout(() => {
+                      setHoveredShow(null);
+                    }, 50);
+                  }}
                 >
                   <td className="px-6 py-5 text-center">{row.no}</td>
                   <td className="px-6 py-5 text-center">{row.show}</td>
