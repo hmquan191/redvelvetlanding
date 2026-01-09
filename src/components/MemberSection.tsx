@@ -271,7 +271,7 @@ export default function MemberSection({
 
       <section className="relative pt-32 pb-16 flex items-center justify-center">
         <div className="text-center z-20 px-6 space-y-4">
-          <span className="text-xs tracking-[0.4em] uppercase text-white/50 [font-family:var(--rv-font-secondary)]">
+          <span className="text-xs tracking-[0.4em] uppercase text-white/50 border-b pb-1 [font-family:var(--rv-font-secondary)]">
             Meet the Queens
           </span>
           <h1 className="[font-family:var(--rv-font-primary)] text-5xl md:text-7xl tracking-tight text-white font-medium">

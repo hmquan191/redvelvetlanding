@@ -1,25 +1,37 @@
 import { motion } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
-export default function Logo() {
-  const [isHover, setIsHover] = useState(false);
 
-  const glints = useMemo(
-    () =>
-      Array.from({ length: 7 }).map((_, i) => ({
-        id: `glint-${i}`,
-        left: `${8 + Math.random() * 84}%`,
-        top: `${10 + Math.random() * 70}%`,
-        delay: Math.random() * 0.25,
-        size: 5 + Math.round(Math.random() * 8),
-      })),
-    []
-  );
+export default function Logo({
+  hidden = false,
+  shineNonce = 0,
+}: {
+  hidden?: boolean;
+  shineNonce?: number;
+}) {
+  const [isHover, setIsHover] = useState(false);
+  const [autoShine, setAutoShine] = useState(false);
+
+  useEffect(() => {
+    if (hidden) return;
+    if (!shineNonce) return;
+
+    setAutoShine(true);
+    const t = window.setTimeout(() => setAutoShine(false), 1100);
+    return () => window.clearTimeout(t);
+  }, [hidden, shineNonce]);
+
+  const shouldShine = (isHover || autoShine) && !hidden;
 
   return (
-    <div className="pointer-events-none fixed left-5 top-5 z-50">
+    <div
+      className="pointer-events-none fixed left-5 top-5 z-40"
+      style={{ opacity: hidden ? 0 : 1 }}
+    >
       <motion.div
-        className="pointer-events-auto relative select-none"
+        className={`relative select-none ${
+          hidden ? "pointer-events-none" : "pointer-events-auto"
+        }`}
         onHoverStart={() => setIsHover(true)}
         onHoverEnd={() => setIsHover(false)}
       >
@@ -38,7 +50,7 @@ export default function Logo() {
               }}
               initial={{ x: "-140%", opacity: 0 }}
               animate={
-                isHover
+                shouldShine
                   ? { x: ["-140%", "140%"], opacity: [0, 1, 0] }
                   : { x: "-140%", opacity: 0 }
               }
