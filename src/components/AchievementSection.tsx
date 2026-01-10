@@ -149,7 +149,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
   return (
     <div ref={ref} className="relative p-2 sm:p-4">
       <div className="min-w-0">
-        <div className="text-sm sm:text-base md:text-lg uppercase tracking-[0.22em] text-white/70 [font-family:var(--rv-font-logo)]">
+        <div className="whitespace-pre-line text-sm sm:text-base md:text-lg uppercase tracking-wide text-white/70 [font-family:var(--rv-font-logo)]">
           {stat.label}
         </div>
       </div>
@@ -165,9 +165,9 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
           aria-label={`${stat.label} ${stat.value}`}
         >
           <span
-            className="relative z-20 block text-7xl sm:text-8xl md:text-9xl leading-none tracking-tight text-white/95"
+            className="relative font-semibold z-20 block text-7xl sm:text-8xl md:text-9xl  tracking-tight text-white/95"
             style={{
-              fontFamily: "var(--rv-font-achievement)",
+              fontFamily: "var(--rv-font-logo)",
               textShadow: isActive
                 ? "0 0 34px rgba(255,255,255,0.10)"
                 : "0 0 18px rgba(255,255,255,0.06)",
@@ -221,11 +221,11 @@ type MusicShowRow = {
 export default function AchievementSection() {
   const stats = useMemo<Stat[]>(
     () => [
-      { label: "Music Show Total Wins", value: "84" },
-      { label: "YouTube Total Views", value: "3.3B" },
-      { label: "Full Group MV 100M+ Views", value: "12" },
+      { label: "Music Show\nTotal Wins", value: "84" },
+      { label: "YouTube\nTotal Views", value: "3.3B" },
+      { label: "Full Group MV\n100M+ Views", value: "12" },
 
-      { label: "Spotify Total Streams", value: "3.8B" },
+      { label: "Spotify\nTotal Streams", value: "3.8B" },
     ],
     []
   );
@@ -405,10 +405,12 @@ export default function AchievementSection() {
         <div className="overflow-x-auto" onMouseMove={handleMouseMove}>
           <table
             className="w-full border-collapse"
-            style={{ fontFamily: "var(--rv-font-achievement)" }}
+
           >
             <thead>
-              <tr className="text-sm font-extrabold border-b border-white/10 text-white/50 text-xs uppercase tracking-[0.25em]">
+              <tr className="text-sm font-extrabold border-b border-white/10 text-white/50 text-xs uppercase tracking-[0.25em]"
+            style={{ fontFamily: "var(--rv-font-logo)" }}
+            >
                 <th className="px-6 py-4 font-medium">No.</th>
                 <th className="px-6 py-4 font-medium">Music Show</th>
                 <th className="px-6 py-4 font-medium"># of Wins</th>
@@ -434,9 +436,16 @@ export default function AchievementSection() {
                     }, 50);
                   }}
                 >
-                  <td className="px-6 py-5 text-center">{row.no}</td>
-                  <td className="px-6 py-5 text-center">{row.show}</td>
-                  <td className="px-6 py-5 text-center">{row.wins}</td>
+                  <td className="px-6 py-5 text-center"
+            style={{ fontFamily: "var(--rv-font-logo)" }}
+            >{row.no}</td>
+                  <td className="px-6 py-5 text-center italic"
+            style={{ fontFamily: "var(--rv-font-primary)" }}
+            >{row.show}</td>
+                  <td className="px-6 py-5 text-center"
+            style={{ fontFamily: "var(--rv-font-logo)" }}
+          
+                  >{row.wins}</td>
                 </tr>
               ))}
             </tbody>
