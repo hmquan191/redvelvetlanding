@@ -70,7 +70,7 @@ export default function WalkThroughSection() {
       {
         type: "text",
         content: "SM water tastes like water",
-        position: "center",
+        position: "top",
       },
       {
         type: "image",
@@ -104,7 +104,7 @@ export default function WalkThroughSection() {
       {
         type: "image",
         src: "/img/team_pic/12.webp",
-        position: "bottom",
+        position: "center",
         size: "lg",
       },
       // { type: "image", src: "/img/team_pic/13.webp", position: "bottom", size: "sm" },
