@@ -20,9 +20,10 @@ function WandSvg() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <linearGradient id="wandGrad" x1="30" y1="40" x2="190" y2="200">
-          <stop stopColor="rgba(255,255,255,0.95)" />
-          <stop offset="1" stopColor="rgba(255,255,255,0.35)" />
+        {/* Gradient flipped: bright tip at bottom-left (55,165), dim handle at top-right (165,55) */}
+        <linearGradient id="wandGrad" x1="190" y1="200" x2="30" y2="40">
+          <stop stopColor="rgba(255,255,255,1)" />
+          <stop offset="1" stopColor="rgba(255,255,255,0.7)" />
         </linearGradient>
       </defs>
       <path
@@ -94,6 +95,121 @@ function SparkleBurst({ isOn }: { isOn: boolean }) {
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1.05 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          />
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
+// Magical dust burst at wand tip (burst-only, synced with burstOn)
+function WandDustBurst({ isOn }: { isOn: boolean }) {
+  // Check for reduced motion preference
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+  // Generate dust particles around the wand tip
+  // Wand tip is at ~75% x, ~25% y of the 220x220 SVG (around 165, 55)
+  const dustParticles = useMemo(() => {
+    if (prefersReducedMotion) return [];
+    return Array.from({ length: 24 }).map((_, i) => {
+      const angle = (Math.PI * 2 * i) / 24 + Math.random() * 0.3;
+      const r = 12 + Math.random() * 35;
+      // Color variation: mostly white with hints of gold (#eeb211) and purple (#6c3082)
+      const colorRoll = Math.random();
+      let color = "rgba(255, 255, 255, 0.95)";
+      let glow = "0 0 12px rgba(255, 255, 255, 0.8)";
+      if (colorRoll < 0.2) {
+        color = "rgba(238, 178, 17, 0.9)"; // gold hint
+        glow = "0 0 14px rgba(238, 178, 17, 0.7)";
+      } else if (colorRoll < 0.35) {
+        color = "rgba(108, 48, 130, 0.85)"; // purple hint
+        glow = "0 0 14px rgba(108, 48, 130, 0.6)";
+      }
+      return {
+        id: `dust-${i}`,
+        x: Math.cos(angle) * r,
+        y: Math.sin(angle) * r,
+        size: 2 + Math.random() * 2.5,
+        delay: Math.random() * 0.12,
+        color,
+        glow,
+      };
+    });
+  }, [prefersReducedMotion]);
+
+  if (prefersReducedMotion) return null;
+
+  return (
+    <AnimatePresence>
+      {isOn ? (
+        <motion.div
+          className="pointer-events-none absolute"
+          // Position at wand tip: bottom-left of SVG path (55, 165)
+          style={{ left: 55, top: 165 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          {/* Glow halo behind particles */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 80,
+              height: 80,
+              left: -40,
+              top: -40,
+              background:
+                "radial-gradient(closest-side, rgba(255,255,255,0.35), rgba(238,178,17,0.12) 50%, transparent)",
+              filter: "blur(8px)",
+            }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1.2 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+          {/* Dust particles */}
+          {dustParticles.map((p) => (
+            <motion.span
+              key={p.id}
+              className="absolute rounded-full"
+              style={{
+                width: p.size,
+                height: p.size,
+                backgroundColor: p.color,
+                boxShadow: p.glow,
+              }}
+              initial={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
+              animate={{
+                x: p.x,
+                y: p.y,
+                opacity: [0, 1, 0.8, 0],
+                scale: [0.4, 1.2, 1, 0.6],
+              }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.65,
+                delay: p.delay,
+                ease: "easeOut",
+              }}
+            />
+          ))}
+          {/* Secondary inner glow pulse */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 24,
+              height: 24,
+              left: -12,
+              top: -12,
+              background:
+                "radial-gradient(closest-side, rgba(255,255,255,0.6), transparent)",
+            }}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: [0, 1, 0], scale: [0.6, 1.4, 1] }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           />
@@ -318,23 +434,26 @@ export default function OpeningScene({
             {/* wand */}
             <motion.div
               className="pointer-events-none absolute right-[10%] top-[18%] drop-shadow-[0_0_22px_rgba(255,255,255,0.25)]"
-              initial={{ rotate: -12, y: 0, x: 0, opacity: 0 }}
+              style={{
+                // Pivot point at wand handle (top-right of SVG path: 165, 55 in 220x220 = 75% 25%)
+                transformOrigin: "75% 25%",
+              }}
+              initial={{ rotate: 35, opacity: 0 }}
               animate={
                 isActive
                   ? {
                       opacity: 1,
-                      rotate: [-12, -6, -10, 6],
-                      y: [0, -6, 0, 4],
-                      x: [0, 0, 0, -24],
+                      rotate: [35, 10, -10, -5],
                     }
                   : { opacity: 0 }
               }
               transition={{
-                duration: 1.25,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
               }}
             >
               <WandSvg />
+              <WandDustBurst isOn={burstOn} />
             </motion.div>
 
             {/* title */}
