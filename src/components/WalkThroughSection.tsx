@@ -4,7 +4,12 @@ import * as React from "react";
 import { ReactLenis } from "lenis/react";
 
 type GalleryItem =
-  | { type: "image"; src: string; position: "top" | "center" | "bottom"; size: "sm" | "md" | "lg" }
+  | {
+      type: "image";
+      src: string;
+      position: "top" | "center" | "bottom";
+      size: "sm" | "md" | "lg";
+    }
   | { type: "text"; content: string; position: "top" | "center" | "bottom" };
 
 export default function WalkThroughSection() {
@@ -22,27 +27,102 @@ export default function WalkThroughSection() {
   // Gallery items with scattered positioning
   const galleryItems = useMemo<GalleryItem[]>(
     () => [
-      { type: "image", src: "/img/team_pic/team_cc3.jpg", position: "top", size: "lg" },
-      { type: "text", content: "Happiness! Hello, this is Red Velvet.", position: "bottom" },
-      { type: "image", src: "/img/team_pic/3.webp", position: "bottom", size: "lg" },
-      { type: "image", src: "/img/team_pic/4.webp", position: "center", size: "lg" },
-      { type: "text", content: "Do you know Red Velvet? I'm a Korean Singer", position: "center" },
-      { type: "image", src: "/img/team_pic/5.webp", position: "top", size: "lg" },
-      { type: "image", src: "/img/team_pic/6.webp", position: "bottom", size: "md" },
-      { type: "text", content: "SM water tastes like water", position: "center" },
-      { type: "image", src: "/img/team_pic/7.webp", position: "center", size: "lg" },
-      { type: "image", src: "/img/team_pic/9.webp", position: "top", size: "sm" },
-      { type: "image", src: "/img/team_pic/10.webp", position: "bottom", size: "lg" },
-      { type: "text", content: "Because ReVeluvs exist,\nwe exist", position: "center" },
-      { type: "image", src: "/img/team_pic/11.webp", position: "center", size: "sm" },
-      { type: "image", src: "/img/team_pic/12.webp", position: "top", size: "lg" },
+      {
+        type: "image",
+        src: "/img/team_pic/team_cc3.jpg",
+        position: "top",
+        size: "lg",
+      },
+      {
+        type: "text",
+        content: "Happiness! Hello, this is Red Velvet.",
+        position: "bottom",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/3.webp",
+        position: "bottom",
+        size: "lg",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/4.webp",
+        position: "center",
+        size: "lg",
+      },
+      {
+        type: "text",
+        content: "Do you know Red Velvet? I'm a Korean Singer",
+        position: "center",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/5.webp",
+        position: "top",
+        size: "lg",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/6.webp",
+        position: "bottom",
+        size: "md",
+      },
+      {
+        type: "text",
+        content: "SM water tastes like water",
+        position: "center",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/7.webp",
+        position: "center",
+        size: "lg",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/9.webp",
+        position: "top",
+        size: "sm",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/10.webp",
+        position: "bottom",
+        size: "lg",
+      },
+      {
+        type: "text",
+        content: "Because ReVeluvs exist,\nwe exist",
+        position: "center",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/11.webp",
+        position: "top",
+        size: "sm",
+      },
+      {
+        type: "image",
+        src: "/img/team_pic/12.webp",
+        position: "bottom",
+        size: "lg",
+      },
       // { type: "image", src: "/img/team_pic/13.webp", position: "bottom", size: "sm" },
-      { type: "image", src: "/img/team_pic/14.webp", position: "center", size: "md" },
+      {
+        type: "image",
+        src: "/img/team_pic/14.webp",
+        position: "center",
+        size: "md",
+      },
       // { type: "text", content: "I don't have a daughter like you", position: "bottom" },
 
-      { type: "image", src: "/img/team_pic/team_cc2.jpg", position: "top", size: "md" },
+      {
+        type: "image",
+        src: "/img/team_pic/team_cc2.jpg",
+        position: "top",
+        size: "md",
+      },
       // { type: "image", src: "/img/team_pic/team_cc2.jpg", position: "top", size: "md" },
-
     ],
     []
   );
@@ -105,7 +185,9 @@ export default function WalkThroughSection() {
               return (
                 <motion.div
                   key={`text-${idx}`}
-                  className={`flex-shrink-0 ${getPositionClasses(item.position)}`}
+                  className={`flex-shrink-0 ${getPositionClasses(
+                    item.position
+                  )}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.5 }}
@@ -131,7 +213,9 @@ export default function WalkThroughSection() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div
-                  className={`${getSizeClasses(item.size)} overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.4)]`}
+                  className={`${getSizeClasses(
+                    item.size
+                  )} overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.4)]`}
                 >
                   <img
                     src={item.src}
