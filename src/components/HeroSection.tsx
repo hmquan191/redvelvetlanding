@@ -11,7 +11,7 @@ export default function HeroSection({
     target: ref,
     offset: ["start start", "end start"],
   });
-
+  // thêm comment nháp
   const inView = useInView(ref, { margin: "-15% 0px -70% 0px" });
   useEffect(() => {
     onInViewChange?.(inView);
