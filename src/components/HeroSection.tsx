@@ -68,8 +68,8 @@ export default function HeroSection({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(900px 520px at 50% 35%, rgba(255,255,255,0.10), transparent 58%), radial-gradient(700px 520px at 18% 76%, rgba(194,30,86,0.24), transparent 60%), radial-gradient(760px 520px at 82% 72%, rgba(0,112,184,0.22), transparent 62%), radial-gradient(680px 520px at 80% 18%, rgba(238,178,17,0.16), transparent 58%)",
-          filter: "saturate(1.25) contrast(1.02)",
+            "radial-gradient(900px 520px at 50% 35%, rgba(255,255,255,0.10), transparent 58%), radial-gradient(700px 520px at 18% 76%, color-mix(in srgb, var(--rv-irene) 25%, transparent), transparent 60%), radial-gradient(760px 520px at 82% 72%, color-mix(in srgb, var(--rv-wendy) 26%, transparent), transparent 62%), radial-gradient(680px 520px at 80% 18%, color-mix(in srgb, var(--rv-seulgi) 22%, transparent), transparent 58%), radial-gradient(720px 520px at 18% 18%, color-mix(in srgb, var(--rv-yeri) 30%, transparent), transparent 60%), radial-gradient(760px 560px at 52% 92%, color-mix(in srgb, var(--rv-joy) 18%, transparent), transparent 65%)",
+          filter: "saturate(1.15) contrast(1.02)",
         }}
         animate={{
           opacity: [0.9, 1, 0.92],
@@ -168,7 +168,7 @@ export default function HeroSection({
           className="rv-title"
         >
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight text-shadow-sm text-white">
-            <span className="block italic font-light opacity-90">Cosmic</span>{" "}
+            <span className="block italic font-light opacity-90 hover:opacity-100">Cosmic</span>{" "}
             Velvet
           </h1>
         </motion.h1>
